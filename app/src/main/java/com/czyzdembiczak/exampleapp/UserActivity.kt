@@ -19,5 +19,18 @@ class UserActivity : AppCompatActivity() {
             text = message
         }
 
+        val btnStartCount = findViewById<Button>(R.id.btnStartCount)
+        btnStartCount.setOnClickListener{
+            Thread{
+                Intent(this, CountService::class.java).also{
+                    startService(it)
+                }
+            }.start()
+        }
+
+        val btnStoptCount = findViewById<Button>(R.id.btnStopCount)
+        btnStoptCount.setOnClickListener{
+            CountService.stopService()
+        }
     }
 }

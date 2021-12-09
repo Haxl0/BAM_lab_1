@@ -25,11 +25,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <service
-            android:name=".MyCountService"
-            android:enabled="true"
-            android:exported="true"></service>
         <service
             android:name=".CountService"
             android:enabled="true"
