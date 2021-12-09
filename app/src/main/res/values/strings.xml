@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ExampleApp</string>
+    <string name="b_send_name">Send</string>
+    <string name="et_username">Name</string>
+</resources>
