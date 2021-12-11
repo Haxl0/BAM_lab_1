@@ -26,17 +26,13 @@ class CountService : IntentService("CountService") {
 
     override fun onHandleIntent(p0: Intent?) {
         try{
-            suspend fun doWorld() = coroutineScope{
-                launch {
-                    isRunning = true
-                    var number:Int = 0
+            isRunning = true
+            var number:Int = 0
 
-                    while(isRunning){
-                        number += 1
-                        Log.d("CountService","$number")
-                        Thread.sleep(1000)
-                    }
-                }
+            while(isRunning){
+                number += 1
+                Log.d("CountService","$number")
+                Thread.sleep(1000)
             }
         }catch(e: InterruptedException){
             Thread.currentThread().interrupt()
