@@ -7,16 +7,19 @@ import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import com.czyzdembiczak.exampleapp.db.UserDatabase
+import com.czyzdembiczak.exampleapp.db.UserRepository
 
 class MainActivity : AppCompatActivity() {
     var receiver: BroadcastReceiver? = null
 
+    val database by lazy { UserDatabase.getDatabase(this) }
+    val repository by lazy { UserRepository(database.userDao()) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         configureReceiver()
-
     }
 
     override fun onDestroy() {
@@ -27,7 +30,7 @@ class MainActivity : AppCompatActivity() {
     private fun configureReceiver() {
         val filter = IntentFilter()
         filter.addAction(RECEIVER_ACTION_USER_AND_NUMBER)
-        receiver = NumberReceiver()
+        receiver = NumberReceiver(repository)
         registerReceiver(receiver, filter)
     }
 

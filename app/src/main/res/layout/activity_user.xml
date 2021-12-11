@@ -40,4 +40,13 @@
         android:text="Stop Count"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvUserActivityView" />
+
+    <Button
+        android:id="@+id/btnReadCountFromDb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Rows count in DB"
+        app:layout_constraintStart_toStartOf="@+id/btnStartCount"
+        app:layout_constraintTop_toBottomOf="@+id/btnStartCount" />
 </androidx.constraintlayout.widget.ConstraintLayout>

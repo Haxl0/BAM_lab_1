@@ -45,6 +45,7 @@ class CountService : IntentService("CountService") {
 
 
     override fun onHandleIntent(p0: Intent?) {
+        number = 0
         counting()
     }
 }
