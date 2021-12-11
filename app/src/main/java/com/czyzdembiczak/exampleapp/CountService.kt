@@ -3,8 +3,7 @@ package com.czyzdembiczak.exampleapp
 import android.app.IntentService
 import android.content.Intent
 import android.util.Log
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 class CountService : IntentService("CountService") {
 
@@ -23,19 +22,25 @@ class CountService : IntentService("CountService") {
         }
     }
 
+     fun counting(): Deferred<Unit> {
+        return GlobalScope.async(Dispatchers.IO){
+            try{
+                isRunning = true
+                var number:Int = 0
+
+                while(isRunning){
+                    number += 1
+                    Log.d("CountService","$number")
+                    Thread.sleep(1000)
+                }
+            }catch(e: InterruptedException){
+                Thread.currentThread().interrupt()
+            }
+        }
+    }
+
 
     override fun onHandleIntent(p0: Intent?) {
-        try{
-            isRunning = true
-            var number:Int = 0
-
-            while(isRunning){
-                number += 1
-                Log.d("CountService","$number")
-                Thread.sleep(1000)
-            }
-        }catch(e: InterruptedException){
-            Thread.currentThread().interrupt()
-        }
+        counting()
     }
 }
