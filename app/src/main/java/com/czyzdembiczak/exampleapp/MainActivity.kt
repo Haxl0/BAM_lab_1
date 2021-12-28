@@ -3,7 +3,10 @@ package com.czyzdembiczak.exampleapp
 import android.content.BroadcastReceiver
 import android.content.Intent
 import android.content.IntentFilter
+import android.database.Cursor
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
@@ -41,6 +44,28 @@ class MainActivity : AppCompatActivity() {
             putExtra(EXTRA_USERNAME, username)
         }
         startActivity(intent)
+    }
+
+    fun queryUsingContentProvider(view: View) {
+        val cursor: Cursor? = contentResolver.query(
+            Uri.parse("content://com.czyzdembiczak.exampleapp.provider/users"),
+            null,
+            null,
+            null,
+            null
+        )
+        if (cursor!!.moveToFirst()) {
+            while (!cursor.isAfterLast) {
+                Log.d(
+                    "CP", "id: ${cursor.getString(cursor.getColumnIndex("uid"))}, " +
+                            "username: ${cursor.getString(cursor.getColumnIndex("username"))}, " +
+                            "number: ${cursor.getString(cursor.getColumnIndex("number"))}"
+                )
+                cursor.moveToNext()
+            }
+        } else {
+            Log.d("CP", "No Records Found")
+        }
     }
 
     companion object {

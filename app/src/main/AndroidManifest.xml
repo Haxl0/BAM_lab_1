@@ -32,6 +32,12 @@
             android:enabled="true"
             android:exported="true"></receiver>
 
+        <provider
+            android:name=".UserContentProvider"
+            android:authorities="com.czyzdembiczak.exampleapp.provider"
+            android:enabled="true"
+            android:exported="true"></provider>
+
         <service
             android:name=".CountService"
             android:enabled="true"
