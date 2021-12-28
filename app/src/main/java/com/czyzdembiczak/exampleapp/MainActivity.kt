@@ -66,6 +66,7 @@ class MainActivity : AppCompatActivity() {
         } else {
             Log.d("CP", "No Records Found")
         }
+        cursor.close()
     }
 
     companion object {
